@@ -66,80 +66,6 @@ CREATE TABLE IF NOT EXISTS EscrituraNotarial (
         REFERENCES Propiedades(id)
         ON DELETE CASCADE
 );
-¡Claro que sí! Aquí tienes un README.md completo y profesional para tu proyecto, listo para copiar y pegar directamente en un archivo.
-
-Está basado en la excelente documentación del proyecto prog2int, pero 100% adaptado a tu nueva arquitectura y lógica de negocio de Propiedades y EscriturasNotariales.
-
-Markdown
-
-# Sistema de Gestión Inmobiliaria (Propiedades y Escrituras)
-
-## Trabajo Práctico Integrador - Programación 2
-
-### Descripción del Proyecto
-
-Este proyecto es una aplicación de consola para la gestión de bienes inmuebles, permitiendo registrar propiedades y sus escrituras notariales asociadas.
-
-El sistema está construido sobre una **arquitectura robusta de 4 capas** (Presentación, Servicio, Acceso a Datos y Modelo) adaptada del proyecto `prog2int`. Demuestra el manejo de transacciones JDBC para operaciones complejas (como registrar una propiedad y su escritura de forma atómica), el uso del patrón DAO, y una clara separación de responsabilidades.
-
-### Características Principales
-
-* **Gestión Transaccional**: El alta de una Propiedad y su Escritura Notarial se maneja en una única transacción. Si una falla, ambas se revierten (`rollback`).
-* **Arquitectura en Capas**: Clara separación entre la Interfaz de Usuario (`Main`), Lógica de Negocio (`Service`) y Acceso a Datos (`Dao`).
-* **Modelo de Dominio Fuerte**: Clases `Propiedad` y `EscrituraNotarial` que heredan de una `EntidadBase` común.
-* **Búsqueda Avanzada**: Permite listar todo y buscar propiedades por su padrón catastral.
-* **Seguridad**: Uso de `PreparedStatement` en todas las operaciones de base de datos para prevenir inyección SQL.
-* **Soft Delete (Borrado Lógico)**: Los registros nunca se borran físicamente. Se marcan con `eliminado = true`, preservando la integridad de los datos.
-
-### Tecnologías Utilizadas
-
-* **Lenguaje**: Java
-* **Base de Datos**: MySQL
-* **Conexión**: JDBC (a través del driver `mysql-connector-j`)
-* **Arquitectura**: 4 Capas (UI, Servicio, DAO, Modelo)
-
----
-
-## Instalación y Configuración
-
-### 1. Script de la Base de Datos
-
-Antes de ejecutar el proyecto, necesitas crear las tablas en tu base de datos MySQL. El proyecto está configurado para conectarse a la base de datos `tpiprogbd`.
-
-Ejecuta el siguiente script en tu gestor de MySQL:
-
-```sql
-CREATE DATABASE IF NOT EXISTS tpiprogbd;
-USE tpiprogbd;
-
--- 1. Tabla de Propiedades
-CREATE TABLE IF NOT EXISTS Propiedades (
-    id INT PRIMARY KEY,
-    padronCatastral VARCHAR(100) NOT NULL UNIQUE,
-    direccion VARCHAR(255) NOT NULL,
-    superficieM2 DOUBLE,
-    destino VARCHAR(50),
-    antiguedad INT,
-    eliminado BOOLEAN DEFAULT FALSE
-);
-
--- 2. Tabla de Escrituras Notariales
-CREATE TABLE IF NOT EXISTS EscrituraNotarial (
-    id INT PRIMARY KEY,
-    nroEscritura VARCHAR(100) NOT NULL UNIQUE,
-    fecha DATE,
-    notaria VARCHAR(150),
-    tomo VARCHAR(50),
-    folio VARCHAR(50),
-    eliminado BOOLEAN DEFAULT FALSE,
-    
-    -- Clave Foránea (Relación 1 a 1)
-    propiedad_id INT NOT NULL UNIQUE,
-    
-    FOREIGN KEY (propiedad_id) 
-        REFERENCES Propiedades(id)
-        ON DELETE CASCADE
-);
 2. Configuración de la Conexión
 La configuración de la base de datos se encuentra en el archivo Config/DatabaseConnection.java.
 
@@ -149,7 +75,7 @@ Java
 
 public final class DatabaseConnection {
     // Valores por defecto
-    private static final String DEFAULT_URL = "jdbc:mysql://localhost:3306/tpiprogbd";
+    private static final String DEFAULT_URL = "jdbc:mysql://localhost:3307/tpiprogbd";
     private static final String DEFAULT_USER = "root";
     private static final String DEFAULT_PASSWORD = "1234"; // ¡CAMBIA ESTO POR TU CONTRASEÑA!
     
