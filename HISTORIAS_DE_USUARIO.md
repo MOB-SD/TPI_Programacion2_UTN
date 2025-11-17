@@ -1,5 +1,3 @@
-Aquí tienes el documento de Historias de Usuario completo, adaptado a tu proyecto de Propiedades y EscriturasNotariales.Está basado en el excelente ejemplo que me diste, pero modificado para reflejar la lógica de tu nueva arquitectura (transacciones, borrado lógico en cascada, y la relación 1-a-0..1 entre las entidades).Puedes copiar y pegar esto directamente en un archivo HISTORIAS_DE_USUARIO.md en tu proyecto.Markdown# Historias de Usuario - Sistema de Gestión Inmobiliaria
-
 Especificaciones funcionales completas del sistema CRUD de Propiedades y Escrituras Notariales.
 
 ## Tabla de Contenidos
