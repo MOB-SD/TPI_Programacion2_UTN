@@ -1,5 +1,6 @@
 # Sistema de Gestión Inmobiliaria (Propiedades y Escrituras)
-
+## Enlace al video Explicativo: 
+    https://youtu.be/FgWtFmAuOBk 
 ## Trabajo Práctico Integrador - Programación 2
 
 ### Descripción del Proyecto
